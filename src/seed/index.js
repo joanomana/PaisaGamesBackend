@@ -22,9 +22,9 @@ async function seedProductos() {
       tipo: 'JUEGO_FISICO',
       plataforma: 'PLAYSTATION',
       categoria: 'Acción',
-      precio: 69.99,
+      precio: 300000,
       stock: 8,
-      imagen: 'https://picsum.photos/seed/gowr/600/400',
+      imagen: 'https://www.alkosto.com/medias/711719547013-001-750Wx750H?context=bWFzdGVyfGltYWdlc3w2MDQzNnxpbWFnZS93ZWJwfGFHVTJMMmd5WkM4eE5ETXpNelU1TnpReE56VXdNaTgzTVRFM01UazFORGN3TVROZk1EQXhYemMxTUZkNE56VXdTQXxhMjI5NDdjMjRjY2ZlYjUzZDg2OTcwOTVhYzIxOTdmODNkNWUwNzNjMjZiMmNkNTM3MDRkYTM4YWIyMzlmOWM2',
       metadata: { edicion: 'Estándar', region: 'US' }
     },
     {

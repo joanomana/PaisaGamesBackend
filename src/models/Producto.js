@@ -1,21 +1,31 @@
 import mongoose from 'mongoose';
 
-const TIPOS = ['JUEGO_FISICO', 'LLAVE_DIGITAL', 'CONSOLA', 'ACCESORIO', 'COLECCIONABLE'];
-const PLATAFORMAS = ['XBOX', 'PLAYSTATION', 'NINTENDO', 'PC', 'STEAM', 'EPIC', 'VALORANT', 'MULTI'];
+export const TIPOS = ['JUEGO_FISICO','LLAVE_DIGITAL','CONSOLA','ACCESORIO','COLECCIONABLE'];
+export const PLATAFORMAS = ['XBOX','PLAYSTATION','NINTENDO','PC','STEAM','EPIC','VALORANT','MULTI'];
 
 const productoSchema = new mongoose.Schema({
-    nombre:      { type: String, required: true, trim: true },
-    descripcion: { type: String, required: true, trim: true },
-    tipo:        { type: String, required: true, enum: TIPOS },
-    plataforma:  { type: String, required: true, enum: PLATAFORMAS },
-    categoria:   { type: String, required: true, trim: true }, // ej: "Acción", "Consola", "Control", "Figura"
-    precio:      { type: Number, required: true, min: 0 },
-    stock:       { type: Number, required: true, min: 0 },     // 👈 inventario
-    imagen:      { type: String, required: true, trim: true },
-    metadata:    { type: mongoose.Schema.Types.Mixed },        // opcional: {region, edicion, marca, modelo, color, tamaño...}
-}, { timestamps: true });
+    nombre: String,
+    descripcion: String,
+    tipo: { type: String, enum: TIPOS, required: true },
+    plataforma: { type: String, enum: PLATAFORMAS, required: true },
+    categoria: String,
+    precio: { type: Number, min: 0, required: true },
+    stock: { type: Number, min: 0, required: true },
+    imagenes: {
+        type: [String],
+        required: true,
+        validate: v => Array.isArray(v) && v.length >= 3
+    },
+    metadata: mongoose.Schema.Types.Mixed
+    }, {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
+});
 
-productoSchema.index({ nombre: 1 });
-productoSchema.index({ plataforma: 1, tipo: 1 });
+
+productoSchema.virtual('portada').get(function () {
+    return Array.isArray(this.imagenes) && this.imagenes.length ? this.imagenes[0] : null;
+});
 
 export default mongoose.model('Producto', productoSchema);

@@ -1,4 +1,5 @@
-// src/app.js
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './src/config/swagger.js';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
@@ -26,6 +27,9 @@ app.get('/health', (_req, res) => {
 // Rutas principales
 app.use('/api/productos', productoRoutes);
 app.use('/api/ventas', ventaRoutes);
+
+// Docs Swagger
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Manejo de errores centralizado
 app.use(errorHandler);

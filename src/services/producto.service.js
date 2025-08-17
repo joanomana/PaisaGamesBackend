@@ -7,24 +7,30 @@ export async function crearProducto(data) {
 
 
 export async function listarProductos() {
-    const rows = await Producto
-        .find({}, 'nombre precio stock tipo plataforma categoria imagenes createdAt') 
-        .slice('imagenes', 1)   
+    const rows = await Producto.find(
+        {}, 
+        'nombre descripcion precio stock tipo plataforma categoria imagenes portada metadata createdAt updatedAt'
+    )
         .sort({ createdAt: -1 })
         .lean();
 
     return rows.map(p => ({
         _id: p._id,
         nombre: p.nombre,
+        descripcion: p.descripcion ?? '',
         precio: p.precio,
         stock: p.stock,
         tipo: p.tipo,
         plataforma: p.plataforma,
         categoria: p.categoria,
-        portada: p.imagenes && p.imagenes.length ? p.imagenes[0] : null,
+        imagenes: p.imagenes || [],
+        metadata: p.metadata || {},
         createdAt: p.createdAt,
+        updatedAt: p.updatedAt,
+        portada: p.imagenes[0] || null,
     }));
 }
+
 
 
 export async function obtenerProducto(id) {

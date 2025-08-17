@@ -1,7 +1,7 @@
 import { validationResult } from 'express-validator';
 import {crearProducto, listarProductos, obtenerProducto,actualizarProducto, eliminarProducto} from '../services/producto.service.js';
 
-const ALLOWED = ['nombre','descripcion','tipo','plataforma','categoria','precio','stock','imagen','metadata'];
+const ALLOWED = ['nombre','descripcion','tipo','plataforma','categoria','precio','stock','imagenes','metadata'];
 
 const pickAllowed = (obj) =>
     Object.fromEntries(Object.entries(obj).filter(([k]) => ALLOWED.includes(k)));

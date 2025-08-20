@@ -12,6 +12,11 @@ PaisaGames es un sistema de gestión que permite:
 - ✅ API REST completamente documentada con Swagger
 - ✅ Frontend para interacción del usuario
 
+
+## Video
+- Link: [https://drive.google.com/file/d/1C5He7heYDfVm9qSdnXJ3b74VdND5W1mO/view?usp=drive_link](https://drive.google.com/file/d/1C5He7heYDfVm9qSdnXJ3b74VdND5W1mO/view?usp=drive_link)
+
+ 
 ## 🚀 Características Principales
 
 ### Backend (Node.js + Express)
